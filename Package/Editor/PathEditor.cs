@@ -7,8 +7,8 @@ public class PathEditor : ScriptableObject, IEditorWindow
 {
 	private static PathEditor instance;
 	private PathLibrary.Editor editor;
-	private Quaternion quat = new Quaternion( 0, 0, 0, 0 );
-	private Vector3 vect = new Vector3( 0, 0, 0 );
+//	private Quaternion quat = new Quaternion( 0, 0, 0, 0 );
+//	private Vector3 vect = new Vector3( 0, 0, 0 );
 	
 	
 	
@@ -127,7 +127,10 @@ public class PathEditor : ScriptableObject, IEditorWindow
 			EditorUtility.SetDirty( control );
 		}
 		
-		if( SceneView.current != null )
+		// FIXME: the original implementation uses SceneView.current, which is not available in
+		// Unity 3.0. And SceneView class is UNDOCUMENTED private API, see 
+		// http://forum.unity3d.com/threads/64920-Moving-scene-view-camera-from-editor-script
+		if( SceneView.lastActiveSceneView != null )
 		{
 			SceneView.RepaintAll();
 		}

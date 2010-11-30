@@ -17,11 +17,11 @@ public class PathMenu : ScriptableObject
 			nameIdx++;
 		}
 
-		asset = new PathAsset();
+		asset = ScriptableObject.CreateInstance(typeof(PathAsset)) as PathAsset;
 		asset.Data = ( new CollectionAsset() ).GetData();
 		AssetDatabase.CreateAsset( asset, "Assets/" + name + nameIdx + ".asset" );
 		
-		EditorUtility.FocusProjectView();
+		EditorUtility.FocusProjectWindow();
 		Selection.activeObject = asset;
 		
 		EditCollection();
@@ -189,7 +189,7 @@ public class PathMenu : ScriptableObject
 		
 		if( PathLibrary.Editor.Instance == null )
 		{
-			pathEditor = new PathEditor();
+			pathEditor = ScriptableObject.CreateInstance(typeof(PathEditor)) as PathEditor;
 			PathLibrary.Editor.Init( pathEditor );
 			pathEditor.Init();
 		}

@@ -40,7 +40,7 @@ public class PathBrowser : EditorWindow, IBrowserWindow
 		{
 			if( instance == null )
 			{
-				new PathBrowser();
+				ScriptableObject.CreateInstance(typeof(PathBrowser));
 			}
 			
 			return instance;

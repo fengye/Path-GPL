@@ -583,7 +583,10 @@ namespace PathLibrary
 				return new Bounds( SelectedNetwork.Position + transform.position, SelectedNetwork.Size /2.0f );
 			}
 
-			return new Bounds( SceneView.current.pivot, Vector3.zero );
+			// FIXME: the original implementation uses SceneView.current.pivot, which is not available in
+			// Unity 3.0. And SceneView class is UNDOCUMENTED private API, see 
+			// http://forum.unity3d.com/threads/64920-Moving-scene-view-camera-from-editor-script
+			return new Bounds(SceneView.lastActiveSceneView.pivot, Vector3.zero );
 		}
 
 

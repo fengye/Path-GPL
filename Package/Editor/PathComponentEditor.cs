@@ -48,7 +48,7 @@ public class PathComponentEditor : UnityEditor.Editor, IInspector
 	}
 	
 	
-	public void OnInspectorGUI()
+	public override void OnInspectorGUI()
 	{
 		PathControl control;
 		string[] selector;
@@ -114,7 +114,10 @@ public class PathComponentEditor : UnityEditor.Editor, IInspector
 			return PathLibrary.Editor.Instance.OnGetFrameBounds( control.transform );
 		}
 		
-		return new Bounds( SceneView.current.pivot, Vector3.zero );
+		// FIXME: the original implementation uses SceneView.current.pivot, which is not available in
+		// Unity 3.0. And SceneView class is UNDOCUMENTED private API, see 
+		// http://forum.unity3d.com/threads/64920-Moving-scene-view-camera-from-editor-script
+		return new Bounds(SceneView.lastActiveSceneView.pivot, Vector3.zero );
 	}
 	
 	
